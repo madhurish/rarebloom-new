@@ -82,12 +82,20 @@ export default function Hero() {
             ref={containerRef}
             className="relative h-screen w-full overflow-hidden bg-plantation-green"
         >
+            import Image from "next/image";
+            // ... (keep other imports)
+
+            // ... inside component ...
             {/* Background Image */}
             <div className="absolute inset-0 z-0 opacity-40">
-                <img
+                <Image
                     src="/imgs/p5.jpg"
                     alt="Hero Background"
-                    className="w-full h-full object-cover"
+                    fill
+                    priority
+                    quality={90}
+                    className="object-cover"
+                    sizes="100vw"
                 />
             </div>
             <div className="absolute inset-0 z-0 bg-black/30" />
