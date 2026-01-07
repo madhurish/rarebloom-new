@@ -30,20 +30,24 @@ function FlowerModel({ progress }: { progress: React.MutableRefObject<number> })
     useFrame(() => {
         const p = progress.current; // 0 to 1
 
+        // FREEZE POINT: The animation and rotation will complete at 0.85 
+        // and stay there for the remaining scroll.
+        const freezePoint = 0.85;
+        // Map 0..0.85 to 0..1
+        // If p > 0.85, it stays at 1
+        const effectiveP = Math.min(p / freezePoint, 1);
+
         if (mixer.current && animations.length) {
             const clip = mixer.current.clipAction(animations[0]).getClip();
             if (clip) {
-                // Manually setting time updates the animation frame
-                mixer.current.setTime(p * clip.duration);
+                mixer.current.setTime(effectiveP * clip.duration);
             }
         }
 
         if (scene) {
-            // Rotate while scrolling
-            // p=0 -> 0 rad (Front)
-            // p=1 -> 2*PI rad (Front, full spin)
-            scene.rotation.y = p * Math.PI * 2;
-            scene.rotation.x = p * 0.1; // Reduced tilt
+            // Rotate full 360 (or desired angle) by the freeze point
+            scene.rotation.y = effectiveP * Math.PI * 2;
+            scene.rotation.x = effectiveP * 0.1;
         }
     });
 
