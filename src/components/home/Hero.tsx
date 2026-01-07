@@ -13,10 +13,6 @@ function FlowerModel({ progress }: { progress: React.MutableRefObject<number> })
     const mixer = useRef<THREE.AnimationMixer>(null);
 
     useLayoutEffect(() => {
-        if (scene) {
-            // Center/Scale
-            new THREE.Box3().setFromObject(scene).getCenter(scene.position).multiplyScalar(-1);
-        }
 
         console.log("Animations found:", animations.length);
         if (animations.length) {
