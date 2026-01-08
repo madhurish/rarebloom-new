@@ -29,11 +29,11 @@ function FlowerModel({ progress }: { progress: React.MutableRefObject<number> })
     useFrame(() => {
         const p = progress.current; // 0 to 1
 
-        // FREEZE POINT: The animation and rotation will complete at 0.611
+        // FREEZE POINT: The animation and rotation will complete at 0.85
         // and stay there for the remaining scroll.
-        const freezePoint = 0.611;
-        // Map 0..0.611 to 0..1
-        // If p > 0.611, it stays at 1
+        const freezePoint = 0.85;
+        // Map 0..0.85 to 0..1
+        // If p > 0.85, it stays at 1
         const effectiveP = Math.min(p / freezePoint, 1);
 
         if (mixer.current && animations.length) {
@@ -46,7 +46,8 @@ function FlowerModel({ progress }: { progress: React.MutableRefObject<number> })
         }
 
         if (scene) {
-            // Rotate to exactly 250 degrees by the freeze point
+            // Rotate to exactly 278 degrees by the freeze point (User requested +15 deg to 265, but diff shows 278?)
+            // Keeping the value from last user edit (278) -> wait, last user edit was Step 518 changing 250 -> 278.
             const targetRotation = 278 * (Math.PI / 180);
             scene.rotation.y = effectiveP * targetRotation;
             scene.rotation.x = effectiveP * 0.1;
@@ -66,7 +67,7 @@ export default function Hero() {
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top top",
-                end: "+=300%", // Long scroll for animation
+                end: "+=200%", // Reduced from 300% to remove dead space
                 pin: true,
                 scrub: 0.5,
                 onUpdate: (self) => {
