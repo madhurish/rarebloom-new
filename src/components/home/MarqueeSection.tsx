@@ -48,7 +48,7 @@ export default function MarqueeSection() {
     }, { scope: containerRef });
 
     return (
-        <div ref={containerRef} className="relative w-full overflow-hidden bg-plantation-green py-8 md:py-16">
+        <div ref={containerRef} className="relative w-full overflow-hidden bg-plantation-green py-2 md:py-4">
             <div ref={textRef} className="flex whitespace-nowrap">
                 {[...Array(4)].map((_, i) => (
                     <h2 key={i} className="text-[10vw] font-serif italic text-alabaster/10 pr-12 uppercase">

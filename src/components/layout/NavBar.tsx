@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 
 const navLinks = [
-    { name: "The Greenhouse", href: "/" },
+    { name: "Home", href: "/" },
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "The Gallery", href: "/gallery" },
@@ -24,6 +24,7 @@ export default function NavBar() {
     const logoRef = useRef<HTMLAnchorElement>(null);
     const linksRef = useRef<HTMLDivElement>(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isScrolled, setIsScrolled] = useState(false);
     const fullScreenMenuRef = useRef<HTMLDivElement>(null);
     const menuTl = useRef<gsap.core.Timeline | null>(null);
 
@@ -31,33 +32,99 @@ export default function NavBar() {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    useGSAP(() => {
-        // Initialize menu timeline
-        menuTl.current = gsap.timeline({ paused: true })
-            .to(fullScreenMenuRef.current, {
-                display: "flex",
-                duration: 0
-            })
-            .to(fullScreenMenuRef.current, {
-                opacity: 1,
-                duration: 0.5,
-                ease: "power3.inOut"
-            })
-            .from(".mobile-nav-link", {
-                y: 50,
-                opacity: 0,
-                stagger: 0.1,
-                duration: 0.6,
-                ease: "power3.out"
-            }, "-=0.2");
-    }, { scope: navRef });
+    // Scroll Listener
+    useEffect(() => {
+        const handleScroll = () => {
+            if (window.scrollY > 50) {
+                setIsScrolled(true);
+            } else {
+                setIsScrolled(false);
+            }
+        };
 
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
+    // Scroll & Route Visual Logic
+    useGSAP(() => {
+        const ctx = gsap.context(() => {
+            // 1. Initial State based on Route
+            if (!isDarkHeaderRoute && !isScrolled) {
+                // Light Page (e.g. Services) -> Dark Text
+                gsap.set([logoRef.current, ".nav-link", ".menu-btn"], { color: "#2d3a3a" });
+            } else {
+                // Dark Page (Home) -> Light Text
+                gsap.set([logoRef.current, ".nav-link", ".menu-btn"], { color: "#f2f0e9" });
+            }
+
+            // 2. Mobile Menu Timeline
+            menuTl.current = gsap.timeline({ paused: true })
+                .to(fullScreenMenuRef.current, {
+                    display: "flex",
+                    duration: 0
+                })
+                .to(fullScreenMenuRef.current, {
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power3.inOut"
+                })
+                .from(".mobile-nav-link", {
+                    y: 50,
+                    opacity: 0,
+                    stagger: 0.1,
+                    duration: 0.6,
+                    ease: "power3.out"
+                }, "-=0.2");
+
+        }, navRef);
+        return () => ctx.revert();
+    }, { scope: navRef, dependencies: [pathname, isDarkHeaderRoute] }); // Re-run if route changes
+
+    // Handle Scroll Effects
+    useEffect(() => {
+        if (!navRef.current) return;
+
+        if (isScrolled) {
+            // Scrolled: Glassy Background, Dark Text
+            gsap.to(navRef.current, {
+                backgroundColor: "rgba(242, 240, 233, 0.95)",
+                backdropFilter: "blur(12px)",
+                paddingTop: "1rem",
+                paddingBottom: "1rem",
+                duration: 0.4,
+                ease: "power2.out",
+                borderBottom: "1px solid rgba(45, 58, 58, 0.05)",
+                boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
+            });
+            gsap.to([logoRef.current, ".nav-link", ".menu-btn"], { color: "#2d3a3a", duration: 0.4 });
+        } else {
+            // Top: Transparent
+            gsap.to(navRef.current, {
+                backgroundColor: "rgba(242, 240, 233, 0)",
+                backdropFilter: "blur(0px)",
+                paddingTop: "2rem",
+                paddingBottom: "2rem",
+                duration: 0.4,
+                ease: "power2.out",
+                borderBottom: "1px solid rgba(45, 58, 58, 0)",
+                boxShadow: "0 0 0 rgba(0, 0, 0, 0)"
+            });
+
+            // Text color depends on route at top
+            if (isDarkHeaderRoute) {
+                gsap.to([logoRef.current, ".nav-link", ".menu-btn"], { color: "#f2f0e9", duration: 0.4 });
+            } else {
+                gsap.to([logoRef.current, ".nav-link", ".menu-btn"], { color: "#2d3a3a", duration: 0.4 });
+            }
+        }
+    }, [isScrolled, isDarkHeaderRoute]);
+
+    // Handle Menu Toggle
     useEffect(() => {
         if (menuTl.current) {
             if (isMenuOpen) {
                 menuTl.current.play();
-                // Ensure text colors toggle to light/dark depending on design preference for menu
-                // For this, we'll force the menu text to be alabaster (light) on a dark plantation-green background
             } else {
                 menuTl.current.reverse();
             }
