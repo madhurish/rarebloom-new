@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Environment } from "@react-three/drei";
 import MagneticButton from "@/components/ui/MagneticButton";
+import Image from "next/image";
 import * as THREE from "three";
 
 function FlowerModel({ progress }: { progress: React.MutableRefObject<number> }) {
@@ -18,6 +19,8 @@ function FlowerModel({ progress }: { progress: React.MutableRefObject<number> })
         if (animations.length) {
             mixer.current = new THREE.AnimationMixer(scene);
             const action = mixer.current.clipAction(animations[0]);
+            action.loop = THREE.LoopOnce;
+            action.clampWhenFinished = true;
             action.play();
             // action.paused = false; // Try playing to see if it works at all? No, we want scrub.
         }
@@ -26,23 +29,26 @@ function FlowerModel({ progress }: { progress: React.MutableRefObject<number> })
     useFrame(() => {
         const p = progress.current; // 0 to 1
 
-        // FREEZE POINT: The animation and rotation will complete at 0.85 
+        // FREEZE POINT: The animation and rotation will complete at 0.611
         // and stay there for the remaining scroll.
-        const freezePoint = 0.85;
-        // Map 0..0.85 to 0..1
-        // If p > 0.85, it stays at 1
+        const freezePoint = 0.611;
+        // Map 0..0.611 to 0..1
+        // If p > 0.611, it stays at 1
         const effectiveP = Math.min(p / freezePoint, 1);
 
         if (mixer.current && animations.length) {
             const clip = mixer.current.clipAction(animations[0]).getClip();
             if (clip) {
-                mixer.current.setTime(effectiveP * clip.duration);
+                // Prevent wrapping by clamping slightly below duration
+                const t = Math.min(effectiveP * clip.duration, clip.duration - 0.01);
+                mixer.current.setTime(t);
             }
         }
 
         if (scene) {
-            // Rotate full 360 (or desired angle) by the freeze point
-            scene.rotation.y = effectiveP * Math.PI * 2;
+            // Rotate to exactly 250 degrees by the freeze point
+            const targetRotation = 278 * (Math.PI / 180);
+            scene.rotation.y = effectiveP * targetRotation;
             scene.rotation.x = effectiveP * 0.1;
         }
     });
@@ -82,12 +88,8 @@ export default function Hero() {
             ref={containerRef}
             className="relative h-screen w-full overflow-hidden bg-plantation-green"
         >
-            import Image from "next/image";
-            // ... (keep other imports)
-
-            // ... inside component ...
             {/* Background Image */}
-            <div className="absolute inset-0 z-0 opacity-40">
+            <div className="absolute inset-0 z-[1] opacity-40">
                 <Image
                     src="/imgs/p5.jpg"
                     alt="Hero Background"
@@ -98,10 +100,10 @@ export default function Hero() {
                     sizes="100vw"
                 />
             </div>
-            <div className="absolute inset-0 z-0 bg-black/30" />
+            <div className="absolute inset-0 z-[2] bg-black/30" />
 
             {/* 3D Canvas Layer */}
-            <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 z-[5]">
                 <Canvas camera={{ position: [0, 0, 4], fov: 45 }}>
                     <ambientLight intensity={0.5} />
                     <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} />
@@ -111,7 +113,7 @@ export default function Hero() {
             </div>
 
             {/* Title Overlay (Reveals near end) */}
-            <div className="absolute inset-0 z-10 flex flex-col items-center justify-center pointer-events-none fade-in">
+            <div className="absolute inset-0 z-[10] flex flex-col items-center justify-center pointer-events-none fade-in">
                 <div className="hero-title opacity-0 translate-y-10 text-center">
                     <h1 className="text-8xl md:text-9xl font-serif font-bold text-alabaster drop-shadow-lg">
                         Rare Bloom
@@ -127,7 +129,7 @@ export default function Hero() {
             </div>
 
             {/* Initial Prompt */}
-            <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 text-alabaster/50 text-sm uppercase tracking-widest transition-opacity duration-500 ${titleVisible ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`absolute bottom-12 left-1/2 -translate-x-1/2 z-[10] text-alabaster/50 text-sm uppercase tracking-widest transition-opacity duration-500 ${titleVisible ? 'opacity-0' : 'opacity-100'}`}>
                 Scroll to Bloom
             </div>
         </section>
