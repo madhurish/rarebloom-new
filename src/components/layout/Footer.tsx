@@ -10,7 +10,7 @@ export default function Footer() {
 
                 {/* Brand & Address */}
                 <div className="md:w-1/3">
-                    <h2 className="text-4xl font-serif font-bold mb-6">Rare Bloom</h2>
+                    <h2 className="text-4xl font-serif font-bold mb-6 lowercase">rarebloom</h2>
                     <address className="not-italic text-alabaster/70 font-sans leading-relaxed">
                         <p>Burrilanka Road, Kadiyam,</p>
                         <p>East Godavari District,</p>
@@ -24,9 +24,8 @@ export default function Footer() {
                     <h3 className="text-terracotta uppercase tracking-wide text-sm font-semibold mb-2">Navigation</h3>
                     <Link href="/" className="hover:text-terracotta transition-colors w-fit">Home</Link>
                     <Link href="/about" className="hover:text-terracotta transition-colors w-fit">About</Link>
-                    <Link href="/services" className="hover:text-terracotta transition-colors w-fit">Services</Link>
+                    <Link href="/products" className="hover:text-terracotta transition-colors w-fit">Products</Link>
                     <Link href="/gallery" className="hover:text-terracotta transition-colors w-fit">Gallery</Link>
-                    <Link href="/collections" className="hover:text-terracotta transition-colors w-fit">Collections</Link>
                 </div>
 
                 {/* Contact */}

@@ -1,26 +1,27 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import React from "react";
+import NavBar from "@/components/layout/NavBar";
+import Footer from "@/components/layout/Footer";
+import SmoothScroller from "@/components/layout/SmoothScroller";
+import { UIProvider } from "@/context/UIContext";
+import EnquiryModal from "@/components/ui/EnquiryModal";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const inter = Inter({
-  variable: "--font-sans",
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
 const playfair = Playfair_Display({
-  variable: "--font-serif",
+  variable: "--font-playfair",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "Rare Bloom | Luxury Plants",
-  description: "A curated collection of rare and exotic plants.",
+  title: "rarebloom",
+  description: "Cultivating Nature's Masterpieces",
 };
-
-import SmoothScroller from "@/components/layout/SmoothScroller";
-import NavBar from "@/components/layout/NavBar";
-import Footer from "@/components/layout/Footer";
 
 export default function RootLayout({
   children,
@@ -30,13 +31,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${playfair.variable} antialiased bg-alabaster text-plantation-green`}
+        className={`${inter.variable} ${playfair.variable} antialiased bg-alabaster text-plantation-green overflow-x-hidden`}
       >
-        <SmoothScroller>
-          <NavBar />
-          {children}
-          <Footer />
-        </SmoothScroller>
+        <UIProvider>
+          <SmoothScroller>
+            <NavBar />
+            {children}
+            <Footer />
+            <EnquiryModal />
+            <WhatsAppButton />
+          </SmoothScroller>
+        </UIProvider>
       </body>
     </html>
   );

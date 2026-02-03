@@ -6,6 +6,24 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import MagneticButton from "@/components/ui/MagneticButton";
 
+const services = [
+    {
+        title: "Educational Training",
+        desc: "We offer specialized training programs for nursery management, grafting techniques, and plant care for enthusiasts and professionals alike.",
+        img: "/imgs/p1.jpg"
+    },
+    {
+        title: "Students' Study Tour",
+        desc: "We welcome educational visits from schools and colleges, providing students with hands-on experience in understanding plant biodiversity.",
+        img: "/imgs/f6.jpg"
+    },
+    {
+        title: "Government Partnerships",
+        desc: "Official partners for various government department training programs, contributing to the nation's green initiatives.",
+        img: "/imgs/p8.jpg"
+    }
+];
+
 export default function AboutPage() {
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -19,6 +37,17 @@ export default function AboutPage() {
             scrollTrigger: {
                 trigger: ".about-section",
                 start: "top 80%",
+            }
+        });
+
+        gsap.from(".service-card", {
+            y: 50,
+            opacity: 0,
+            stagger: 0.2,
+            duration: 0.8,
+            scrollTrigger: {
+                trigger: ".services-grid",
+                start: "top 75%",
             }
         });
     }, { scope: containerRef });
@@ -65,18 +94,72 @@ export default function AboutPage() {
                     </div>
                 </div>
 
-                {/* Stats Section */}
-                <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-12 border-t border-plantation-green/10 pt-12">
-                    {[
-                        { label: "Years of Heritage", value: "10+" },
-                        { label: "Plant Varieties", value: "5000+" },
-                        { label: "Acres Cultivated", value: "60+" },
-                    ].map((stat, i) => (
-                        <div key={i} className="text-center">
-                            <h3 className="text-6xl font-serif text-terracotta mb-2">{stat.value}</h3>
-                            <p className="text-plantation-green font-sans uppercase tracking-widest text-sm">{stat.label}</p>
-                        </div>
-                    ))}
+                {/* Services / What We Do Section (Moved from Services Page) */}
+                <div className="mt-32">
+                    <header className="mb-16 text-center max-w-2xl mx-auto">
+                        <p className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold">Beyond Plants</p>
+                        <h2 className="text-4xl md:text-5xl font-serif text-plantation-green leading-tight">
+                            Sharing Knowledge & <br /> Serving Community
+                        </h2>
+                    </header>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 services-grid">
+                        {services.map((service, i) => (
+                            <div key={i} className="service-card group cursor-pointer">
+                                <div className="relative h-[300px] w-full rounded-2xl overflow-hidden mb-6 shadow-md group-hover:shadow-xl transition-all duration-500">
+                                    <Image
+                                        src={service.img}
+                                        alt={service.title}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-plantation-green/10 group-hover:bg-transparent transition-colors" />
+                                </div>
+                                <h3 className="text-2xl font-serif text-plantation-green mb-3 group-hover:text-fern-green transition-colors">
+                                    {service.title}
+                                </h3>
+                                <p className="text-plantation-green/70 leading-relaxed text-sm">
+                                    {service.desc}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Impact & Heritage Section (Moved from Hero & Enhanced) */}
+                <div className="mt-32 border-t border-plantation-green/10 pt-20">
+                    <header className="mb-16 text-center max-w-2xl mx-auto">
+                        <p className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold">Our Journey</p>
+                        <h2 className="text-4xl md:text-5xl font-serif text-plantation-green leading-tight">
+                            Growing Together
+                        </h2>
+                    </header>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {[
+                            {
+                                label: "Operating for",
+                                value: "25 Years",
+                                desc: "A legacy of cultivation and care, serving our community with dedication."
+                            },
+                            {
+                                label: "Livelihood for",
+                                value: "150+ People",
+                                desc: "Empowering local families and fostering a community of skilled horticulturists."
+                            },
+                            {
+                                label: "Expanded to",
+                                value: "60+ Acres",
+                                desc: "Started from a single acre, now a vast sanctuary of biodiversity."
+                            },
+                        ].map((stat, i) => (
+                            <div key={i} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center group border border-plantation-green/5">
+                                <h3 className="text-5xl font-serif text-terracotta mb-4 group-hover:scale-110 transition-transform duration-500 inline-block">{stat.value}</h3>
+                                <p className="text-plantation-green font-sans uppercase tracking-widest text-xs font-bold mb-4">{stat.label}</p>
+                                <p className="text-plantation-green/70 text-sm leading-relaxed">{stat.desc}</p>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

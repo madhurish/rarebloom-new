@@ -5,20 +5,22 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import clsx from "clsx";
+import { useUI } from "@/context/UIContext";
 
 const navLinks = [
     { name: "Home", href: "/" },
     { name: "About", href: "/about" },
-    { name: "Services", href: "/services" },
+    { name: "Products", href: "/products" },
     { name: "The Gallery", href: "/gallery" },
-    { name: "Collections", href: "/collections" },
 ];
 
 export default function NavBar() {
     const pathname = usePathname();
+    const { openEnquiry } = useUI();
+
     // Routes that start with a dark background (Hero) require Light Text initially
-    const isDarkHeaderRoute = pathname === "/" || pathname === "/collections";
+    // Products page starts with dark hero too (thinking green)
+    const isDarkHeaderRoute = pathname === "/" || pathname === "/products";
 
     const navRef = useRef<HTMLElement>(null);
     const logoRef = useRef<HTMLAnchorElement>(null);
@@ -52,10 +54,10 @@ export default function NavBar() {
             // 1. Initial State based on Route
             if (!isDarkHeaderRoute && !isScrolled) {
                 // Light Page (e.g. Services) -> Dark Text
-                gsap.set([logoRef.current, ".nav-link", ".menu-btn"], { color: "#2d3a3a" });
+                gsap.set([logoRef.current, ".nav-link", ".menu-btn", ".enquiry-btn"], { color: "#2d3a3a" });
             } else {
                 // Dark Page (Home) -> Light Text
-                gsap.set([logoRef.current, ".nav-link", ".menu-btn"], { color: "#f2f0e9" });
+                gsap.set([logoRef.current, ".nav-link", ".menu-btn", ".enquiry-btn"], { color: "#f2f0e9" });
             }
 
             // 2. Mobile Menu Timeline
@@ -97,7 +99,7 @@ export default function NavBar() {
                 borderBottom: "1px solid rgba(45, 58, 58, 0.05)",
                 boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)"
             });
-            gsap.to([logoRef.current, ".nav-link", ".menu-btn"], { color: "#2d3a3a", duration: 0.4 });
+            gsap.to([logoRef.current, ".nav-link", ".menu-btn", ".enquiry-btn"], { color: "#2d3a3a", duration: 0.4 });
         } else {
             // Top: Transparent
             gsap.to(navRef.current, {
@@ -113,9 +115,9 @@ export default function NavBar() {
 
             // Text color depends on route at top
             if (isDarkHeaderRoute) {
-                gsap.to([logoRef.current, ".nav-link", ".menu-btn"], { color: "#f2f0e9", duration: 0.4 });
+                gsap.to([logoRef.current, ".nav-link", ".menu-btn", ".enquiry-btn"], { color: "#f2f0e9", duration: 0.4 });
             } else {
-                gsap.to([logoRef.current, ".nav-link", ".menu-btn"], { color: "#2d3a3a", duration: 0.4 });
+                gsap.to([logoRef.current, ".nav-link", ".menu-btn", ".enquiry-btn"], { color: "#2d3a3a", duration: 0.4 });
             }
         }
     }, [isScrolled, isDarkHeaderRoute]);
@@ -140,14 +142,14 @@ export default function NavBar() {
                 <Link
                     href="/"
                     ref={logoRef}
-                    className="text-2xl md:text-3xl font-serif font-bold text-alabaster tracking-wide relative z-50"
+                    className="text-2xl md:text-3xl font-serif font-bold text-alabaster tracking-wide relative z-50 lowercase"
                     onClick={() => setIsMenuOpen(false)}
                 >
-                    Rare Bloom
+                    rarebloom
                 </Link>
 
                 {/* Desktop Menu */}
-                <div ref={linksRef} className="hidden md:flex space-x-8">
+                <div ref={linksRef} className="hidden md:flex items-center space-x-8">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
@@ -157,6 +159,14 @@ export default function NavBar() {
                             {link.name}
                         </Link>
                     ))}
+
+                    {/* Enquiry Button (Desktop) */}
+                    <button
+                        onClick={openEnquiry}
+                        className="enquiry-btn text-alabaster hover:text-soft-gold transition-colors text-sm uppercase tracking-widest font-sans"
+                    >
+                        Enquiry
+                    </button>
                 </div>
 
                 {/* Mobile Menu Button */}
@@ -186,6 +196,15 @@ export default function NavBar() {
                             {link.name}
                         </Link>
                     ))}
+                    <button
+                        onClick={() => {
+                            setIsMenuOpen(false);
+                            openEnquiry();
+                        }}
+                        className="mobile-nav-link text-4xl font-serif text-alabaster hover:text-soft-gold transition-colors"
+                    >
+                        Enquiry
+                    </button>
                 </div>
             </div>
         </>
