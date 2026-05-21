@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "rarebloom",
+  title: "RareBloom",
   description: "Cultivating Nature's Masterpieces",
 };
 

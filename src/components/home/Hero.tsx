@@ -116,8 +116,8 @@ export default function Hero() {
             {/* Title Overlay (Reveals near end) */}
             <div className="absolute inset-0 z-[10] flex flex-col items-center justify-center pointer-events-none fade-in">
                 <div className="hero-title opacity-0 translate-y-10 text-center px-4">
-                    <h1 className="text-8xl md:text-9xl font-serif font-bold text-alabaster drop-shadow-lg lowercase mb-2">
-                        rarebloom
+                    <h1 className="text-8xl md:text-9xl font-serif font-bold text-alabaster drop-shadow-lg mb-2">
+                        RareBloom
                     </h1>
                     <p className="mt-4 text-xl text-soft-gold uppercase tracking-widest font-sans mb-8">
                         Nature · Art · Legacy

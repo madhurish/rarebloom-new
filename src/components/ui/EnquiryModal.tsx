@@ -6,12 +6,14 @@ import gsap from "gsap";
 import { IoClose } from "react-icons/io5";
 
 export default function EnquiryModal() {
-    const { isEnquiryOpen, closeEnquiry } = useUI();
+    const { isEnquiryOpen, enquirySubject, closeEnquiry } = useUI();
     const modalRef = useRef<HTMLDivElement>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const [requirements, setRequirements] = React.useState("");
 
     useEffect(() => {
         if (isEnquiryOpen) {
+            setRequirements(enquirySubject ? `I am interested in acquiring the specimen: ${enquirySubject}` : "");
             gsap.to(modalRef.current, {
                 opacity: 1,
                 pointerEvents: "auto",
@@ -30,12 +32,12 @@ export default function EnquiryModal() {
                 ease: "power2.in"
             });
         }
-    }, [isEnquiryOpen]);
+    }, [isEnquiryOpen, enquirySubject]);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         // Handle form submission logic here
-        console.log("Enquiry submitted");
+        console.log("Enquiry submitted for:", requirements);
         closeEnquiry();
     };
 
@@ -85,6 +87,8 @@ export default function EnquiryModal() {
                             <textarea
                                 required
                                 rows={4}
+                                value={requirements}
+                                onChange={(e) => setRequirements(e.target.value)}
                                 className="w-full bg-white border border-plantation-green/10 rounded-lg px-4 py-3 text-plantation-green focus:outline-none focus:border-terracotta transition-colors resize-none"
                                 placeholder="Describe what you are looking for..."
                             />

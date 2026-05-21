@@ -4,7 +4,8 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface UIContextType {
     isEnquiryOpen: boolean;
-    openEnquiry: () => void;
+    enquirySubject: string;
+    openEnquiry: (subject?: string) => void;
     closeEnquiry: () => void;
 }
 
@@ -12,12 +13,20 @@ const UIContext = createContext<UIContextType | undefined>(undefined);
 
 export const UIProvider = ({ children }: { children: ReactNode }) => {
     const [isEnquiryOpen, setIsEnquiryOpen] = useState(false);
+    const [enquirySubject, setEnquirySubject] = useState("");
 
-    const openEnquiry = () => setIsEnquiryOpen(true);
-    const closeEnquiry = () => setIsEnquiryOpen(false);
+    const openEnquiry = (subject?: string) => {
+        setEnquirySubject(subject || "");
+        setIsEnquiryOpen(true);
+    };
+
+    const closeEnquiry = () => {
+        setIsEnquiryOpen(false);
+        setEnquirySubject("");
+    };
 
     return (
-        <UIContext.Provider value={{ isEnquiryOpen, openEnquiry, closeEnquiry }}>
+        <UIContext.Provider value={{ isEnquiryOpen, enquirySubject, openEnquiry, closeEnquiry }}>
             {children}
         </UIContext.Provider>
     );

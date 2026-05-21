@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -142,10 +143,17 @@ export default function NavBar() {
                 <Link
                     href="/"
                     ref={logoRef}
-                    className="text-2xl md:text-3xl font-serif font-bold text-alabaster tracking-wide relative z-50 lowercase"
+                    className="relative z-50 flex items-center justify-center w-10 h-10 hover:scale-105 transition-transform duration-300"
                     onClick={() => setIsMenuOpen(false)}
                 >
-                    rarebloom
+                    <Image
+                        src="/logos/trademark.png"
+                        alt="rarebloom brandmark"
+                        width={40}
+                        height={40}
+                        className="object-contain"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Menu */}
@@ -162,7 +170,7 @@ export default function NavBar() {
 
                     {/* Enquiry Button (Desktop) */}
                     <button
-                        onClick={openEnquiry}
+                        onClick={() => openEnquiry()}
                         className="enquiry-btn text-alabaster hover:text-soft-gold transition-colors text-sm uppercase tracking-widest font-sans"
                     >
                         Enquiry

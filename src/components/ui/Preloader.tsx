@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useProgress } from "@react-three/drei";
 import gsap from "gsap";
+import Image from "next/image";
 
 export default function Preloader() {
     const { progress } = useProgress();
@@ -46,12 +47,18 @@ export default function Preloader() {
             ref={containerRef}
             className="fixed inset-0 z-[100] bg-plantation-green flex flex-col items-center justify-center text-alabaster"
         >
-            <h1
+            <div
                 ref={textRef}
-                className="text-6xl md:text-8xl font-serif font-bold lowercase mb-8 tracking-tighter"
+                className="relative w-[320px] h-[240px] mb-8"
             >
-                rarebloom
-            </h1>
+                <Image
+                    src="/logos/full-logo.png"
+                    alt="RareBloom Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                />
+            </div>
 
             <div
                 ref={percentRef}

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
     return (
@@ -10,7 +11,14 @@ export default function Footer() {
 
                 {/* Brand & Address */}
                 <div className="md:w-1/3">
-                    <h2 className="text-4xl font-serif font-bold mb-6 lowercase">rarebloom</h2>
+                    <div className="relative w-48 h-12 mb-6">
+                        <Image
+                            src="/logos/textlogo.png"
+                            alt="RareBloom"
+                            fill
+                            className="object-contain brightness-0 invert"
+                        />
+                    </div>
                     <address className="not-italic text-alabaster/70 font-sans leading-relaxed">
                         <p>Burrilanka Road, Kadiyam,</p>
                         <p>East Godavari District,</p>
