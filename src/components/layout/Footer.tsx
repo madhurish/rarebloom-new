@@ -45,12 +45,24 @@ export default function Footer() {
                     <p className="text-alabaster/70">
                         <a href="tel:+919876543210" className="hover:text-white transition-colors">+91 98765 43210</a>
                     </p>
+                </div>
+            </div>
 
-                    <div className="mt-8">
-                        <p className="text-xs text-alabaster/30 uppercase tracking-widest">
-                            © {new Date().getFullYear()} Rare Bloom. All rights reserved.
-                        </p>
-                    </div>
+            {/* Bottom Bar */}
+            <div className="container mx-auto mt-16 pt-8 border-t border-alabaster/10 flex flex-col md:flex-row justify-between items-center gap-6">
+                <p className="text-xs text-alabaster/40 uppercase tracking-widest">
+                    © {new Date().getFullYear()} RareBloom. All rights reserved.
+                </p>
+                <div className="text-xs font-sans tracking-widest uppercase text-alabaster/60 flex items-center gap-2">
+                    <span>Designed & Developed by</span>
+                    <a
+                        href="https://wishcoinmedia.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-soft-gold hover:text-terracotta transition-all duration-300 font-bold border-b border-soft-gold/30 hover:border-terracotta pb-0.5 hover:scale-105"
+                    >
+                        wishcoinmedia
+                    </a>
                 </div>
             </div>
         </footer>
