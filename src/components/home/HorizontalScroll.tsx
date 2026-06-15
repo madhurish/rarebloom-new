@@ -48,10 +48,10 @@ export default function HorizontalScroll() {
             >
                 <div className="bg-transparent w-96 shrink-0 mr-24">
                     <h2 className="text-6xl font-serif text-plantation-green leading-tight">
-                        A Legacy <br /> of Growth
+                        A Legacy <br /> of Trust
                     </h2>
-                    <p className="mt-6 text-plantation-green/70 font-sans max-w-xs">
-                        From a humble 50 cents of land to a national landmark in Kadiyam.
+                    <p className="mt-6 text-plantation-green/70 font-sans max-w-xs leading-relaxed">
+                        Rooted in trust and growing for over 15 years, cultivating happiness and health through our premium selection of flora.
                     </p>
                 </div>
 
@@ -67,9 +67,8 @@ export default function HorizontalScroll() {
                             <div className="absolute inset-0 bg-plantation-green/10 group-hover:bg-transparent transition-all duration-500" />
                         </div>
 
-                        <div className="absolute -bottom-12 left-0 w-full flex justify-between items-baseline opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                            <h3 className="text-2xl font-serif text-plantation-green">{plant.name}</h3>
-                            <span className="text-terracotta font-sans tracking-wide">{plant.price}</span>
+                        <div className="absolute -bottom-12 left-0 w-full flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                            <h3 className="text-2xl font-serif text-plantation-green text-center">{plant.name}</h3>
                         </div>
                     </div>
                 ))}

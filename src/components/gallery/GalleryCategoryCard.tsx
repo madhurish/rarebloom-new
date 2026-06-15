@@ -10,7 +10,7 @@ interface CategoryCardProps {
     description: string;
     count: number;
     cover: string;
-    onClick: () => void;
+    onClick?: () => void;
 }
 
 export default function GalleryCategoryCard({
@@ -30,7 +30,7 @@ export default function GalleryCategoryCard({
                             src={cover}
                             alt={name}
                             fill
-                            className="object-cover transition-transform duration-1000 ease-out scale-100 group-hover:scale-110 opacity-75 group-hover:opacity-90"
+                            className="object-cover transition-transform duration-1000 ease-out scale-100 group-hover:scale-105 opacity-75 group-hover:opacity-90"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         />
                         {/* Elegant Dark Gradient overlay */}
@@ -53,12 +53,6 @@ export default function GalleryCategoryCard({
                         <p className="text-alabaster/70 text-sm font-sans leading-relaxed line-clamp-2 max-w-md">
                             {description}
                         </p>
-
-                        {/* Visual indicator of interaction */}
-                        <div className="mt-6 flex items-center space-x-2 text-xs uppercase tracking-widest text-soft-gold font-sans font-medium opacity-0 translate-y-3 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                            <span>Explore Gallery</span>
-                            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-                        </div>
                     </div>
 
                     {/* Full screen hover glass glow */}

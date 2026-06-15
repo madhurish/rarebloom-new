@@ -120,7 +120,7 @@ export default function Hero() {
                         RareBloom
                     </h1>
                     <p className="mt-4 text-xl text-soft-gold uppercase tracking-widest font-sans mb-8">
-                        Nature · Art · Legacy
+                        Growing Nature, Building Trust
                     </p>
 
                     <div className="mt-12 pointer-events-auto">

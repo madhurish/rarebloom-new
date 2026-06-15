@@ -51,10 +51,10 @@ export default function PinnedSection() {
             <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
                 <div ref={textRef} className="clip-text pb-4">
                     <h2 className="text-6xl md:text-8xl font-serif text-alabaster leading-none">
-                        Unearth <br /> The Extraordinary
+                        Growing Nature, <br /> Building Trust
                     </h2>
                     <p className="mt-8 text-xl text-soft-gold font-sans tracking-widest uppercase">
-                        Curated for the connoisseur
+                        RareBloom by Sai Venkata Durga Nursery
                     </p>
                 </div>
             </div>

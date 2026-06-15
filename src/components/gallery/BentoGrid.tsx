@@ -1,15 +1,20 @@
 "use client";
 
 import React, { useState } from "react";
-import { galleryData, categoriesMeta } from "@/data/galleryData";
+import Image from "next/image";
+import { categoriesMeta } from "@/data/galleryData";
 import GalleryCategoryCard from "@/components/gallery/GalleryCategoryCard";
-import CategoryGalleryOverlay from "@/components/gallery/CategoryGalleryOverlay";
+
+interface CategoryMeta {
+    id: string;
+    name: string;
+    description: string;
+    count: number;
+    cover: string;
+}
 
 export default function BentoGrid() {
-    const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
-
-    const activeCategoryMeta = categoriesMeta.find(cat => cat.id === selectedCategoryId);
-    const activeCategoryItems = selectedCategoryId ? galleryData[selectedCategoryId] : [];
+    const [selectedCategory, setSelectedCategory] = useState<CategoryMeta | null>(null);
 
     return (
         <div className="min-h-screen bg-alabaster px-6 md:px-12 py-32">
@@ -37,19 +42,48 @@ export default function BentoGrid() {
                             description={category.description}
                             count={category.count}
                             cover={category.cover}
-                            onClick={() => setSelectedCategoryId(category.id)}
+                            onClick={() => setSelectedCategory(category)}
                         />
                     ))}
                 </div>
             </div>
 
-            {/* Immersive Overlay Gallery */}
-            {selectedCategoryId && activeCategoryMeta && (
-                <CategoryGalleryOverlay
-                    categoryName={activeCategoryMeta.name}
-                    items={activeCategoryItems}
-                    onClose={() => setSelectedCategoryId(null)}
-                />
+            {/* Beautiful Image Viewer Modal */}
+            {selectedCategory && (
+                <div
+                    className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 bg-plantation-green/90 backdrop-blur-md transition-opacity duration-300"
+                    onClick={() => setSelectedCategory(null)}
+                >
+                    <div
+                        className="relative max-w-5xl max-h-[80vh] w-full h-full flex flex-col items-center justify-center"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        {/* The Image itself - no shade, no filters */}
+                        <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-alabaster/10 bg-black/45">
+                            <Image
+                                src={selectedCategory.cover}
+                                alt={selectedCategory.name}
+                                fill
+                                className="object-contain"
+                                priority
+                            />
+                        </div>
+
+                        {/* Title overlay or label at the bottom of the image viewer */}
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md border border-alabaster/10 text-alabaster text-xs md:text-sm font-sans tracking-widest uppercase px-6 py-3 rounded-full z-10 select-none shadow-lg whitespace-nowrap">
+                            {selectedCategory.name}
+                        </div>
+
+                        {/* Close button */}
+                        <button
+                            onClick={() => setSelectedCategory(null)}
+                            className="absolute -top-14 right-2 md:-top-16 md:-right-4 w-10 h-10 rounded-full bg-alabaster/10 text-alabaster flex items-center justify-center backdrop-blur-md border border-alabaster/20 hover:bg-terracotta hover:border-terracotta hover:text-white hover:scale-105 transition-all duration-300 shadow-md"
+                            aria-label="Close image viewer"
+                        >
+                            ✕
+                        </button>
+                    </div>
+                </div>
             )}
         </div>
     );

@@ -51,7 +51,7 @@ export default function Footer() {
             {/* Bottom Bar */}
             <div className="container mx-auto mt-16 pt-8 border-t border-alabaster/10 flex flex-col md:flex-row justify-between items-center gap-6">
                 <p className="text-xs text-alabaster/40 uppercase tracking-widest">
-                    © {new Date().getFullYear()} RareBloom. All rights reserved.
+                    © {new Date().getFullYear()} RareBloom by Sai Venkata Durga Nursery. All rights reserved.
                 </p>
                 <div className="text-xs font-sans tracking-widest uppercase text-alabaster/60 flex items-center gap-2">
                     <span>Designed & Developed by</span>

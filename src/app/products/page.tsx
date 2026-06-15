@@ -9,19 +9,29 @@ import MagneticButton from "@/components/ui/MagneticButton";
 
 const productDetails = [
     {
-        title: "Rare Orchids",
-        description: "Exquisite and delicate, our rare orchids are sourced from the finest growers globally. Each bloom tells a story of elegance.",
-        image: "/imgs/f4.jpg"
-    },
-    {
-        title: "Indoor Foliage",
-        description: "Transform your interior spaces with our lush, air-purifying indoor plants. Perfect for modern living.",
+        title: "Indoor & Air-Purifying Plants",
+        description: "Snake plants, ZZ plants, money plants, and elegant ferns for homes or offices to bring health and freshness indoors.",
         image: "/imgs/p2.jpg"
     },
     {
-        title: "Landscape Specimens",
-        description: "Grand trees and shrubs to define your outdoor landscape. Grown with care to ensure structural integrity and beauty.",
+        title: "Flowering & Ornamental Plants",
+        description: "Vibrant roses, hibiscus, jasmine, and seasonal blooms to add rich colors and elegant aesthetics to your gardens.",
+        image: "/imgs/f4.jpg"
+    },
+    {
+        title: "Fruit & Culinary Plants",
+        description: "High-yield mango, lemon, guava, and organic culinary/herbal plants like tulsi or mint for fresh home harvests.",
+        image: "/imgs/f1.jpg"
+    },
+    {
+        title: "Avenue & Landscaping Trees",
+        description: "Large shade-giving trees, decorative palms, and boundary hedging plants perfect for commercial and infrastructure projects.",
         image: "/imgs/p7.jpg"
+    },
+    {
+        title: "Gardening Essentials",
+        description: "Premium potting mixes, organic fertilizers, durable planters, and basic gardening tools to support healthy growth.",
+        image: "/imgs/p5.jpg"
     }
 ];
 

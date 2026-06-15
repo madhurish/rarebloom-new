@@ -8,18 +8,18 @@ import MagneticButton from "@/components/ui/MagneticButton";
 
 const services = [
     {
-        title: "Educational Training",
-        desc: "We offer specialized training programs for nursery management, grafting techniques, and plant care for enthusiasts and professionals alike.",
+        title: "Garden Development Solutions",
+        desc: "We provide comprehensive landscape design support, premium plantings, and installation coordination to transform empty spaces into botanical masterpieces.",
         img: "/imgs/p1.jpg"
     },
     {
-        title: "Students' Study Tour",
-        desc: "We welcome educational visits from schools and colleges, providing students with hands-on experience in understanding plant biodiversity.",
+        title: "Nursery Consultancy",
+        desc: "Our expert horticulturists provide personalized guidance on plant care, growth management, weather resilience, and soil compatibility tailored to your location.",
         img: "/imgs/f6.jpg"
     },
     {
-        title: "Government Partnerships",
-        desc: "Official partners for various government department training programs, contributing to the nation's green initiatives.",
+        title: "Bulk Plant Supply",
+        desc: "Reliable commercial nursery partner specializing in wholesale supply for massive real estate developments, campus projects, and municipal tree initiatives.",
         img: "/imgs/p8.jpg"
     }
 ];
@@ -55,49 +55,48 @@ export default function AboutPage() {
     return (
         <div ref={containerRef} className="bg-alabaster min-h-screen pt-32 pb-20">
             <div className="container mx-auto px-6 md:px-12">
+                {/* Intro Section */}
                 <div className="flex flex-col md:flex-row gap-16 items-center about-section">
                     {/* Text Content */}
                     <div className="md:w-1/2">
                         <h1 className="text-5xl md:text-7xl font-serif text-plantation-green leading-tight mb-8 reveal-text">
-                            Cultivating Nature's <br /> <span className="text-fern-green italic">Masterpieces</span>
+                            Cultivating Nature, <br /> <span className="text-fern-green italic">Building Trust</span>
                         </h1>
 
                         <div className="space-y-6 text-lg text-plantation-green/80 font-sans leading-relaxed reveal-text">
                             <p>
-                                <strong>Rare Bloom</strong> is a sanctuary for plant enthusiasts, dedicated to the art of horticulture.
-                                For decades, we have curated a collection of nature's finest specimens, bringing life and beauty to spaces across the region.
+                                For over 15 years, <strong>RareBloom by Sai Venkata Durga Nursery</strong> has been a trusted name in the nursery and landscaping industry. We specialize in supplying a wide range of high-quality plants, trees, flowering plants, ornamental plants, fruit plants, avenue plants, medicinal plants, and landscaping materials to customers across Andhra Pradesh and neighboring North and South regions.
                             </p>
                             <p>
-                                From the lush foliage of tropical giants to the delicate blooms of rare orchids, our nursery offers a diverse range of high-quality plants.
-                                Sourced responsibly and grown with expert care, each plant tells a story of growth and vitality.
+                                With a commitment to quality, reliability, and customer satisfaction, we have successfully served farmers, landscapers, government projects, institutions, real estate developments, and individual garden enthusiasts. Our extensive experience and passion for greenery have helped us build lasting relationships with our clients.
                             </p>
                             <p>
-                                Whether you are a seasoned collector or beginning your green journey, our extensive selection of indoor and outdoor varieties ensures there is something perfect for every environment.
+                                As a premier wholesale and retail supplier, we provide vibrant, healthy flora to transform spaces. Establishing our online presence expands our reach from local buyers to nationwide plant lovers, landscapers, and commercial clients, bringing nature closer to your life today.
                             </p>
                         </div>
 
                         <div className="mt-12 reveal-text">
                             <MagneticButton>
-                                Visit Our Nursery
+                                Contact Our Experts
                             </MagneticButton>
                         </div>
                     </div>
 
                     {/* Image Grid */}
                     <div className="md:w-1/2 grid grid-cols-2 gap-4">
-                        <div className="relative h-[400px] w-full rounded-2xl overflow-hidden mt-12">
-                            <Image src="/imgs/p3.jpg" alt="Legacy Image" fill className="object-cover" />
+                        <div className="relative h-[400px] w-full rounded-2xl overflow-hidden mt-12 shadow-lg">
+                            <Image src="/imgs/p3.jpg" alt="Botanical Heritage" fill className="object-cover" />
                         </div>
-                        <div className="relative h-[300px] w-full rounded-2xl overflow-hidden">
-                            <Image src="/imgs/f7.jpg" alt="Legacy Image" fill className="object-cover" />
+                        <div className="relative h-[300px] w-full rounded-2xl overflow-hidden shadow-lg">
+                            <Image src="/imgs/f7.jpg" alt="Sapling cultivation" fill className="object-cover" />
                         </div>
                     </div>
                 </div>
 
-                {/* Services / What We Do Section (Moved from Services Page) */}
+                {/* Services / What We Do Section */}
                 <div className="mt-32">
                     <header className="mb-16 text-center max-w-2xl mx-auto">
-                        <p className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold">Beyond Plants</p>
+                        <p className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold">What We Offer</p>
                         <h2 className="text-4xl md:text-5xl font-serif text-plantation-green leading-tight">
                             Sharing Knowledge & <br /> Serving Community
                         </h2>
@@ -126,10 +125,10 @@ export default function AboutPage() {
                     </div>
                 </div>
 
-                {/* Impact & Heritage Section (Moved from Hero & Enhanced) */}
+                {/* Impact & Heritage Stats Section */}
                 <div className="mt-32 border-t border-plantation-green/10 pt-20">
                     <header className="mb-16 text-center max-w-2xl mx-auto">
-                        <p className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold">Our Journey</p>
+                        <p className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold">Our Heritage</p>
                         <h2 className="text-4xl md:text-5xl font-serif text-plantation-green leading-tight">
                             Growing Together
                         </h2>
@@ -138,19 +137,19 @@ export default function AboutPage() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {[
                             {
-                                label: "Operating for",
-                                value: "25 Years",
-                                desc: "A legacy of cultivation and care, serving our community with dedication."
+                                label: "Of Experience",
+                                value: "15+ Years",
+                                desc: "Cultivating nature and building lasting client relationships since our founding 15 years ago."
                             },
                             {
-                                label: "Livelihood for",
-                                value: "150+ People",
-                                desc: "Empowering local families and fostering a community of skilled horticulturists."
+                                label: "Horticulture",
+                                value: "Expert Care",
+                                desc: "Every sapling is nurtured using premium soil, organic fertilizers, and sustainable farming practices."
                             },
                             {
-                                label: "Expanded to",
-                                value: "60+ Acres",
-                                desc: "Started from a single acre, now a vast sanctuary of biodiversity."
+                                label: "Botanical Scale",
+                                value: "Wide Variety",
+                                desc: "From indoor desk plants to massive landscaping trees, managing a diverse inventory to fulfill bulk or retail needs."
                             },
                         ].map((stat, i) => (
                             <div key={i} className="bg-white p-10 rounded-2xl shadow-sm hover:shadow-md transition-shadow text-center group border border-plantation-green/5">
@@ -161,6 +160,52 @@ export default function AboutPage() {
                         ))}
                     </div>
                 </div>
+
+                {/* Mission, Vision & Why Choose Us Section */}
+                <div className="mt-32 border-t border-plantation-green/10 pt-20">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                        {/* Mission & Vision */}
+                        <div className="space-y-12">
+                            <div>
+                                <span className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold block">Our Mission</span>
+                                <h3 className="text-3xl font-serif text-plantation-green mb-4">Promoting a Greener Environment</h3>
+                                <p className="text-plantation-green/80 leading-relaxed font-sans">
+                                    To promote a greener environment by providing healthy, premium-quality plants and professional nursery solutions while ensuring excellent customer service and sustainable growing practices.
+                                </p>
+                            </div>
+                            <div>
+                                <span className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold block">Our Vision</span>
+                                <h3 className="text-3xl font-serif text-plantation-green mb-4">Contributing to Sustainability</h3>
+                                <p className="text-plantation-green/80 leading-relaxed font-sans">
+                                    To become one of the most trusted and preferred nursery suppliers in India by contributing to environmental sustainability and helping create beautiful green spaces.
+                                </p>
+                            </div>
+                        </div>
+
+                        {/* Why Choose Us */}
+                        <div className="bg-plantation-green text-alabaster p-10 md:p-12 rounded-3xl shadow-xl flex flex-col justify-center">
+                            <span className="text-soft-gold uppercase tracking-[0.2em] mb-4 text-xs font-semibold block">Why Choose Us</span>
+                            <h3 className="text-4xl font-serif mb-8 text-alabaster">Rooted in Trust, Growing with Quality</h3>
+                            <ul className="space-y-4 font-sans text-alabaster/80 text-sm md:text-base">
+                                {[
+                                    "15+ Years of Industry Experience",
+                                    "Wide Variety of Healthy Plants & Trees",
+                                    "Quality Assured Plant Material",
+                                    "Bulk Supply Capability for Projects",
+                                    "Competitive Pricing & Clear Advice",
+                                    "Timely Delivery & Nationwide Shipping",
+                                    "Customer-Focused Horticultural Support"
+                                ].map((item, idx) => (
+                                    <li key={idx} className="flex items-center gap-3">
+                                        <span className="text-soft-gold text-lg">✓</span>
+                                        <span>{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     );
