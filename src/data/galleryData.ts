@@ -91,7 +91,7 @@ export const categoriesMeta = [
         id: "malpighia",
         name: "Malpighia",
         description: "Meticulously shaped dwarf shrubs and compact statement specimens.",
-        count: 12,
+        count: 77,
         cover: "/gallery/Malpighia.jpg"
     },
     {

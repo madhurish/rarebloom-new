@@ -140,21 +140,31 @@ export default function NavBar() {
                 ref={navRef}
                 className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 flex justify-between items-center transition-all bg-transparent"
             >
-                <Link
-                    href="/"
-                    ref={logoRef}
-                    className="relative z-50 flex items-center justify-center w-10 h-10 hover:scale-105 transition-transform duration-300"
-                    onClick={() => setIsMenuOpen(false)}
-                >
-                    <Image
-                        src="/logos/trademark.png"
-                        alt="rarebloom brandmark"
-                        width={40}
-                        height={40}
-                        className="object-contain"
-                        priority
-                    />
-                </Link>
+                <div className="relative z-50 flex items-center gap-3 md:gap-4">
+                    <Link
+                        href="/"
+                        ref={logoRef}
+                        className="relative flex items-center justify-start w-[150px] md:w-[220px] h-8 md:h-10 hover:scale-105 transition-transform duration-300"
+                        onClick={() => setIsMenuOpen(false)}
+                    >
+                        <Image
+                            src="/logos/rareblom.png"
+                            alt="RareBloom Logo"
+                            fill
+                            className="object-contain object-left"
+                            priority
+                        />
+                    </Link>
+                    <div className="relative w-12 h-12 md:w-20 md:h-20 hover:scale-105 transition-transform duration-300 select-none">
+                        <Image
+                            src="/logos/svd-logo.png"
+                            alt="Sai Venkata Durga Nursery emblem"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
+                    </div>
+                </div>
 
                 {/* Desktop Menu */}
                 <div ref={linksRef} className="hidden md:flex items-center space-x-8">

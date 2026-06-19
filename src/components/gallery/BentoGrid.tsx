@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { categoriesMeta } from "@/data/galleryData";
 import GalleryCategoryCard from "@/components/gallery/GalleryCategoryCard";
@@ -13,8 +13,29 @@ interface CategoryMeta {
     cover: string;
 }
 
+const malpighiaImages = Array.from({ length: 77 }, (_, i) => `/gallery/Malpighia Models/Malpighia Models_${i + 1}.jpg`);
+
 export default function BentoGrid() {
     const [selectedCategory, setSelectedCategory] = useState<CategoryMeta | null>(null);
+    const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+    // Keyboard navigation for carousel
+    useEffect(() => {
+        if (!selectedCategory || selectedCategory.id !== "malpighia") return;
+
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "ArrowRight") {
+                setActiveImageIndex((prev) => (prev + 1) % malpighiaImages.length);
+            } else if (e.key === "ArrowLeft") {
+                setActiveImageIndex((prev) => (prev - 1 + malpighiaImages.length) % malpighiaImages.length);
+            } else if (e.key === "Escape") {
+                setSelectedCategory(null);
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [selectedCategory]);
 
     return (
         <div className="min-h-screen bg-alabaster px-6 md:px-12 py-32">
@@ -42,7 +63,10 @@ export default function BentoGrid() {
                             description={category.description}
                             count={category.count}
                             cover={category.cover}
-                            onClick={() => setSelectedCategory(category)}
+                            onClick={() => {
+                                setSelectedCategory(category);
+                                setActiveImageIndex(0);
+                            }}
                         />
                     ))}
                 </div>
@@ -61,7 +85,7 @@ export default function BentoGrid() {
                         {/* The Image itself - no shade, no filters */}
                         <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-alabaster/10 bg-black/45">
                             <Image
-                                src={selectedCategory.cover}
+                                src={selectedCategory.id === "malpighia" ? malpighiaImages[activeImageIndex] : selectedCategory.cover}
                                 alt={selectedCategory.name}
                                 fill
                                 className="object-contain"
@@ -69,9 +93,45 @@ export default function BentoGrid() {
                             />
                         </div>
 
+                        {/* Slider Controls for Malpighia */}
+                        {selectedCategory.id === "malpighia" && (
+                            <>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setActiveImageIndex((prev) => (prev - 1 + malpighiaImages.length) % malpighiaImages.length);
+                                    }}
+                                    className="absolute left-2 md:-left-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-alabaster/10 text-alabaster flex items-center justify-center backdrop-blur-md border border-alabaster/20 hover:bg-terracotta hover:border-terracotta hover:text-white hover:scale-105 transition-all duration-300 shadow-md z-20"
+                                    aria-label="Previous image"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                    </svg>
+                                </button>
+                                <button
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        setActiveImageIndex((prev) => (prev + 1) % malpighiaImages.length);
+                                    }}
+                                    className="absolute right-2 md:-right-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-alabaster/10 text-alabaster flex items-center justify-center backdrop-blur-md border border-alabaster/20 hover:bg-terracotta hover:border-terracotta hover:text-white hover:scale-105 transition-all duration-300 shadow-md z-20"
+                                    aria-label="Next image"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                    </svg>
+                                </button>
+                            </>
+                        )}
+
                         {/* Title overlay or label at the bottom of the image viewer */}
-                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md border border-alabaster/10 text-alabaster text-xs md:text-sm font-sans tracking-widest uppercase px-6 py-3 rounded-full z-10 select-none shadow-lg whitespace-nowrap">
-                            {selectedCategory.name}
+                        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md border border-alabaster/10 text-alabaster text-xs md:text-sm font-sans tracking-widest uppercase px-6 py-3 rounded-full z-10 select-none shadow-lg whitespace-nowrap flex items-center gap-3">
+                            <span>{selectedCategory.name}</span>
+                            {selectedCategory.id === "malpighia" && (
+                                <>
+                                    <span className="text-soft-gold font-bold">|</span>
+                                    <span className="text-alabaster/60 font-semibold">{activeImageIndex + 1} / {malpighiaImages.length}</span>
+                                </>
+                            )}
                         </div>
 
                         {/* Close button */}
