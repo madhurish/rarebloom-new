@@ -19,12 +19,16 @@ export default function Footer() {
                             className="object-contain brightness-0 invert"
                         />
                     </div>
-                    <address className="not-italic text-alabaster/70 font-sans leading-relaxed">
+                    <address className="not-italic text-alabaster/70 font-sans leading-relaxed mb-6">
                         <p>Burrilanka Road, Kadiyam,</p>
                         <p>East Godavari District,</p>
                         <p>Andhra Pradesh, 533126</p>
                         <p>India</p>
                     </address>
+                    <div className="text-xs uppercase tracking-widest text-alabaster/40 font-sans space-y-1">
+                        <p>Govt. License Regd. No. 06/2019</p>
+                        <p>Ina Regd. No. 2845</p>
+                    </div>
                 </div>
 
                 {/* Links */}
