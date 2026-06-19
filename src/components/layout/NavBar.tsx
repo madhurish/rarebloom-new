@@ -138,13 +138,13 @@ export default function NavBar() {
         <>
             <nav
                 ref={navRef}
-                className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 flex justify-between items-center transition-all bg-transparent"
+                className="fixed top-0 left-0 w-full z-50 px-4 md:px-12 flex justify-between items-center transition-all bg-transparent"
             >
-                <div className="relative z-50 flex items-center gap-3 md:gap-4">
+                <div className="relative z-50 flex items-center gap-2 sm:gap-3 md:gap-4">
                     <Link
                         href="/"
                         ref={logoRef}
-                        className="relative flex items-center justify-start w-[150px] md:w-[220px] h-8 md:h-10 hover:scale-105 transition-transform duration-300"
+                        className="relative flex items-center justify-start w-[140px] sm:w-[180px] md:w-[260px] lg:w-[320px] aspect-[10430/822] hover:scale-105 transition-transform duration-300"
                         onClick={() => setIsMenuOpen(false)}
                     >
                         <Image
@@ -155,7 +155,7 @@ export default function NavBar() {
                             priority
                         />
                     </Link>
-                    <div className="relative w-12 h-12 md:w-20 md:h-20 hover:scale-105 transition-transform duration-300 select-none">
+                    <div className="relative w-[80px] sm:w-[100px] md:w-[150px] lg:w-[180px] aspect-[768/104] hover:scale-105 transition-transform duration-300 select-none">
                         <Image
                             src="/logos/svd-logo.png"
                             alt="Sai Venkata Durga Nursery emblem"
