@@ -138,33 +138,22 @@ export default function NavBar() {
         <>
             <nav
                 ref={navRef}
-                className="fixed top-0 left-0 w-full z-50 px-4 md:px-12 flex justify-between items-center transition-all bg-transparent"
+                className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 flex justify-between items-center transition-all bg-transparent"
             >
-                <div className="relative z-50 flex items-center gap-2 sm:gap-3 md:gap-4">
-                    <Link
-                        href="/"
-                        ref={logoRef}
-                        className="relative flex items-center justify-start w-[140px] sm:w-[180px] md:w-[260px] lg:w-[320px] aspect-[10430/822] hover:scale-105 transition-transform duration-300"
-                        onClick={() => setIsMenuOpen(false)}
-                    >
-                        <Image
-                            src="/logos/rareblom.png"
-                            alt="RareBloom Logo"
-                            fill
-                            className="object-contain object-left"
-                            priority
-                        />
-                    </Link>
-                    <div className="relative w-[80px] sm:w-[100px] md:w-[150px] lg:w-[180px] aspect-[768/104] hover:scale-105 transition-transform duration-300 select-none">
-                        <Image
-                            src="/logos/svd-logo.png"
-                            alt="Sai Venkata Durga Nursery emblem"
-                            fill
-                            className="object-contain"
-                            priority
-                        />
-                    </div>
-                </div>
+                <Link
+                    href="/"
+                    ref={logoRef}
+                    className="relative z-50 flex items-center justify-start w-[180px] sm:w-[220px] md:w-[320px] lg:w-[380px] aspect-[10430/822] hover:scale-105 transition-transform duration-300"
+                    onClick={() => setIsMenuOpen(false)}
+                >
+                    <Image
+                        src="/logos/rareblom.png"
+                        alt="RareBloom Logo"
+                        fill
+                        className="object-contain object-left"
+                        priority
+                    />
+                </Link>
 
                 {/* Desktop Menu */}
                 <div ref={linksRef} className="hidden md:flex items-center space-x-8">
