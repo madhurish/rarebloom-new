@@ -50,6 +50,17 @@ export default function AboutPage() {
                 start: "top 75%",
             }
         });
+
+        gsap.from(".proprietor-section", {
+            y: 60,
+            opacity: 0,
+            duration: 1.0,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".proprietor-section",
+                start: "top 80%",
+            }
+        });
     }, { scope: containerRef });
 
     return (
@@ -158,6 +169,41 @@ export default function AboutPage() {
                                 <p className="text-plantation-green/70 text-sm leading-relaxed">{stat.desc}</p>
                             </div>
                         ))}
+                    </div>
+                </div>
+
+                {/* Proprietor Section */}
+                <div className="mt-32 border-t border-plantation-green/10 pt-20 flex flex-col md:flex-row gap-16 items-center proprietor-section">
+                    {/* Proprietor Image */}
+                    <div className="md:w-1/2 flex justify-center w-full">
+                        <div className="relative w-full max-w-sm aspect-[628/1024] rounded-2xl overflow-hidden shadow-2xl border border-plantation-green/5">
+                            <Image
+                                src="/imgs/proprietor.jpg"
+                                alt="Kundeti Venkanna Babu - Proprietor of RareBloom"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
+                        </div>
+                    </div>
+
+                    {/* Proprietor Info */}
+                    <div className="md:w-1/2">
+                        <span className="text-terracotta uppercase tracking-[0.2em] mb-4 text-sm font-semibold block">Our Proprietor</span>
+                        <h2 className="text-4xl md:text-5xl font-serif text-plantation-green leading-tight mb-6">
+                            Kundeti Venkanna Babu
+                        </h2>
+                        <div className="space-y-6 text-lg text-plantation-green/80 font-sans leading-relaxed">
+                            <p>
+                                As the founder and proprietor of <strong>RareBloom by Sai Venkata Durga Nursery</strong>, Kundeti Venkanna Babu has dedicated over 15 years to cultivating green spaces and building a legacy of trust in the horticulture industry. His hands-on leadership and deep expertise in plant care have been the driving force behind our nursery's growth.
+                            </p>
+                            <p>
+                                Under his guidance, we have expanded our operations from a local nursery to a nationwide supplier, serving landscaping projects, real estate developers, and individual garden enthusiasts across Andhra Pradesh and neighboring regions. His vision of quality and customer satisfaction remains the cornerstone of every service we offer.
+                            </p>
+                            <blockquote className="border-l-4 border-soft-gold pl-6 py-2 italic text-plantation-green font-serif text-xl my-8 bg-plantation-green/[0.02] rounded-r-xl">
+                                "Growing nature is not just a business for us; it is a commitment to sustainability and building a trust that lasts for generations."
+                            </blockquote>
+                        </div>
                     </div>
                 </div>
 
