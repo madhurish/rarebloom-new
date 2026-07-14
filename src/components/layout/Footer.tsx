@@ -20,10 +20,10 @@ export default function Footer() {
                         />
                     </div>
                     <address className="not-italic text-alabaster/70 font-sans leading-relaxed mb-6">
-                        <p>Burrilanka Road, Kadiyam,</p>
-                        <p>East Godavari District,</p>
-                        <p>Andhra Pradesh, 533126</p>
-                        <p>India</p>
+                        <p>Opp. GNR convention,</p>
+                        <p>Kadiyam to Veeravaram road,</p>
+                        <p>Kadiyapu Lanka, Rajahmundry Rural,</p>
+                        <p>East Godavari Dist., AP, 533126, India</p>
                     </address>
                     <div className="text-xs uppercase tracking-widest text-alabaster/40 font-sans space-y-1">
                         <p>Govt. License Regd. No. 06/2019</p>
@@ -44,10 +44,10 @@ export default function Footer() {
                 <div className="md:w-1/3">
                     <h3 className="text-terracotta uppercase tracking-wide text-sm font-semibold mb-4">Contact</h3>
                     <p className="text-alabaster/70 mb-2">
-                        <a href="mailto:hello@rarebloom.in" className="hover:text-white transition-colors">hello@rarebloom.in</a>
+                        <a href="mailto:svdnursery.venki@gmail.com" className="hover:text-white transition-colors">svdnursery.venki@gmail.com</a>
                     </p>
                     <p className="text-alabaster/70">
-                        <a href="tel:+919876543210" className="hover:text-white transition-colors">+91 98765 43210</a>
+                        <a href="tel:+919703393259" className="hover:text-white transition-colors">+91 97033 93259</a>
                     </p>
                 </div>
             </div>

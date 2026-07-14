@@ -13,11 +13,19 @@ interface CategoryMeta {
     cover: string;
 }
 
-const malpighiaImages = Array.from({ length: 77 }, (_, i) => `/gallery/Malpighia Models/Malpighia Models_${i + 1}.jpg`);
+const deletedIndices = new Set([5, 7, 8, 32, 33, 53, 63]);
+const malpighiaImages = Array.from({ length: 77 }, (_, i) => i + 1)
+    .filter((num) => !deletedIndices.has(num))
+    .map((num) => `/gallery/Malpighia Models/Malpighia Models_${num}.jpg`);
 
 export default function BentoGrid() {
     const [selectedCategory, setSelectedCategory] = useState<CategoryMeta | null>(null);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
+
+    // Reset active index when category changes
+    useEffect(() => {
+        setActiveImageIndex(0);
+    }, [selectedCategory]);
 
     // Keyboard navigation for carousel
     useEffect(() => {
@@ -85,7 +93,11 @@ export default function BentoGrid() {
                         {/* The Image itself - no shade, no filters */}
                         <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-alabaster/10 bg-black/45">
                             <Image
-                                src={selectedCategory.id === "malpighia" ? malpighiaImages[activeImageIndex] : selectedCategory.cover}
+                                src={
+                                    (selectedCategory.id === "malpighia"
+                                        ? (malpighiaImages[activeImageIndex] || malpighiaImages[0])
+                                        : selectedCategory.cover) || "/gallery/Malpighia.jpg"
+                                }
                                 alt={selectedCategory.name}
                                 fill
                                 className="object-contain"
