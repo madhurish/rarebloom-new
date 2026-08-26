@@ -37,10 +37,12 @@ export default function GalleryCategoryCard({
                         <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent transition-opacity duration-500 group-hover:via-black/50" />
                     </div>
 
-                    {/* Badge showing specimen count */}
-                    <div className="absolute top-6 right-6 bg-alabaster/10 backdrop-blur-md border border-alabaster/20 text-soft-gold text-xs uppercase tracking-widest px-4 py-2 rounded-full font-sans z-10">
-                        {count} Specimen{count !== 1 ? "s" : ""}
-                    </div>
+                    {/* Badge showing specimen count — omitted for cover-only categories */}
+                    {count > 0 && (
+                        <div className="absolute top-6 right-6 bg-alabaster/10 backdrop-blur-md border border-alabaster/20 text-soft-gold text-xs uppercase tracking-widest px-4 py-2 rounded-full font-sans z-10">
+                            {count} Specimen{count !== 1 ? "s" : ""}
+                        </div>
+                    )}
 
                     {/* Content Section */}
                     <div className="relative z-10 flex flex-col">

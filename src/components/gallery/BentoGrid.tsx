@@ -2,48 +2,35 @@
 
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import { categoriesMeta } from "@/data/galleryData";
+import { categoriesMeta, type CategoryMeta } from "@/data/galleryData";
 import GalleryCategoryCard from "@/components/gallery/GalleryCategoryCard";
-
-interface CategoryMeta {
-    id: string;
-    name: string;
-    description: string;
-    count: number;
-    cover: string;
-}
-
-const deletedIndices = new Set([5, 7, 8, 32, 33, 53, 63]);
-const malpighiaImages = Array.from({ length: 77 }, (_, i) => i + 1)
-    .filter((num) => !deletedIndices.has(num))
-    .map((num) => `/gallery/Malpighia Models/Malpighia Models_${num}.jpg`);
 
 export default function BentoGrid() {
     const [selectedCategory, setSelectedCategory] = useState<CategoryMeta | null>(null);
     const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-    // Reset active index when category changes
-    useEffect(() => {
-        setActiveImageIndex(0);
-    }, [selectedCategory]);
+    const images = selectedCategory?.images ?? [];
+    const hasCarousel = images.length > 1;
 
     // Keyboard navigation for carousel
     useEffect(() => {
-        if (!selectedCategory || selectedCategory.id !== "malpighia") return;
+        if (!selectedCategory) return;
 
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.key === "ArrowRight") {
-                setActiveImageIndex((prev) => (prev + 1) % malpighiaImages.length);
-            } else if (e.key === "ArrowLeft") {
-                setActiveImageIndex((prev) => (prev - 1 + malpighiaImages.length) % malpighiaImages.length);
-            } else if (e.key === "Escape") {
+            if (e.key === "Escape") {
                 setSelectedCategory(null);
+            } else if (!hasCarousel) {
+                return;
+            } else if (e.key === "ArrowRight") {
+                setActiveImageIndex((prev) => (prev + 1) % images.length);
+            } else if (e.key === "ArrowLeft") {
+                setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length);
             }
         };
 
         window.addEventListener("keydown", handleKeyDown);
         return () => window.removeEventListener("keydown", handleKeyDown);
-    }, [selectedCategory]);
+    }, [selectedCategory, hasCarousel, images.length]);
 
     return (
         <div className="min-h-screen bg-alabaster px-6 md:px-12 py-32">
@@ -93,25 +80,21 @@ export default function BentoGrid() {
                         {/* The Image itself - no shade, no filters */}
                         <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl border border-alabaster/10 bg-black/45">
                             <Image
-                                src={
-                                    (selectedCategory.id === "malpighia"
-                                        ? (malpighiaImages[activeImageIndex] || malpighiaImages[0])
-                                        : selectedCategory.cover) || "/gallery/Malpighia.jpg"
-                                }
-                                alt={selectedCategory.name}
+                                src={images[activeImageIndex]?.path ?? selectedCategory.cover}
+                                alt={images[activeImageIndex]?.name ?? selectedCategory.name}
                                 fill
                                 className="object-contain"
                                 priority
                             />
                         </div>
 
-                        {/* Slider Controls for Malpighia */}
-                        {selectedCategory.id === "malpighia" && (
+                        {/* Slider Controls */}
+                        {hasCarousel && (
                             <>
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        setActiveImageIndex((prev) => (prev - 1 + malpighiaImages.length) % malpighiaImages.length);
+                                        setActiveImageIndex((prev) => (prev - 1 + images.length) % images.length);
                                     }}
                                     className="absolute left-2 md:-left-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-alabaster/10 text-alabaster flex items-center justify-center backdrop-blur-md border border-alabaster/20 hover:bg-terracotta hover:border-terracotta hover:text-white hover:scale-105 transition-all duration-300 shadow-md z-20"
                                     aria-label="Previous image"
@@ -123,7 +106,7 @@ export default function BentoGrid() {
                                 <button
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        setActiveImageIndex((prev) => (prev + 1) % malpighiaImages.length);
+                                        setActiveImageIndex((prev) => (prev + 1) % images.length);
                                     }}
                                     className="absolute right-2 md:-right-16 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-alabaster/10 text-alabaster flex items-center justify-center backdrop-blur-md border border-alabaster/20 hover:bg-terracotta hover:border-terracotta hover:text-white hover:scale-105 transition-all duration-300 shadow-md z-20"
                                     aria-label="Next image"
@@ -138,10 +121,10 @@ export default function BentoGrid() {
                         {/* Title overlay or label at the bottom of the image viewer */}
                         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-black/70 backdrop-blur-md border border-alabaster/10 text-alabaster text-xs md:text-sm font-sans tracking-widest uppercase px-6 py-3 rounded-full z-10 select-none shadow-lg whitespace-nowrap flex items-center gap-3">
                             <span>{selectedCategory.name}</span>
-                            {selectedCategory.id === "malpighia" && (
+                            {hasCarousel && (
                                 <>
                                     <span className="text-soft-gold font-bold">|</span>
-                                    <span className="text-alabaster/60 font-semibold">{activeImageIndex + 1} / {malpighiaImages.length}</span>
+                                    <span className="text-alabaster/60 font-semibold">{activeImageIndex + 1} / {images.length}</span>
                                 </>
                             )}
                         </div>
