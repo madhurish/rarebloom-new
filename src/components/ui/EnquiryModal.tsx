@@ -44,15 +44,17 @@ export default function EnquiryModal() {
     return (
         <div
             ref={modalRef}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none p-4"
+            className="fixed inset-0 z-[100] overflow-y-auto bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none"
         >
+            <div className="flex min-h-full items-center justify-center p-4">
             <div
                 ref={contentRef}
                 className="bg-alabaster w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden relative"
             >
                 <button
                     onClick={closeEnquiry}
-                    className="absolute top-4 right-4 text-plantation-green/60 hover:text-terracotta transition-colors"
+                    className="absolute top-2 right-2 p-2 text-plantation-green/60 hover:text-terracotta transition-colors"
+                    aria-label="Close enquiry form"
                 >
                     <IoClose size={24} />
                 </button>
@@ -102,6 +104,7 @@ export default function EnquiryModal() {
                         </button>
                     </form>
                 </div>
+            </div>
             </div>
         </div>
     );

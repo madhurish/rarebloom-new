@@ -49,7 +49,7 @@ export default function Preloader() {
         >
             <div
                 ref={textRef}
-                className="relative w-[320px] h-[240px] mb-8"
+                className="relative w-[min(320px,70vw)] h-[min(240px,52.5vw)] mb-8"
             >
                 <Image
                     src="/logos/full-logo.png"

@@ -115,11 +115,11 @@ export default function Hero() {
 
             {/* Title Overlay (Reveals near end) */}
             <div className="absolute inset-0 z-[10] flex flex-col items-center justify-center pointer-events-none fade-in">
-                <div className="hero-title opacity-0 translate-y-10 text-center px-4">
-                    <h1 className="text-8xl md:text-9xl font-serif font-bold text-alabaster drop-shadow-lg mb-2">
+                <div className="hero-title opacity-0 translate-y-10 text-center px-6 w-full">
+                    <h1 className="text-[clamp(2.5rem,14vw,4.5rem)] md:text-9xl font-serif font-bold text-alabaster drop-shadow-lg mb-2">
                         RareBloom
                     </h1>
-                    <p className="mt-4 text-xl text-soft-gold uppercase tracking-widest font-sans mb-8">
+                    <p className="mt-4 text-sm sm:text-base md:text-xl text-soft-gold uppercase tracking-[0.15em] md:tracking-widest font-sans mb-8">
                         Growing Nature, Building Trust
                     </p>
 

@@ -123,15 +123,21 @@ export default function FullScreenCarousel() {
                 </button>
 
                 {/* Indicators */}
-                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
+                <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 flex -mx-2">
                     {images.map((_, index) => (
                         <button
                             key={index}
-                            className={`w-2 h-2 rounded-full transition-colors duration-300 ${index === currentIndex ? "bg-white" : "bg-white/50"
-                                }`}
+                            // Padding carries the touch target; the dot itself stays small.
+                            className="px-2 py-4 flex items-center justify-center"
                             onClick={() => scrollToSlide(index)}
                             aria-label={`Go to slide ${index + 1}`}
-                        />
+                            aria-current={index === currentIndex}
+                        >
+                            <span
+                                className={`block w-2 h-2 rounded-full transition-colors duration-300 ${index === currentIndex ? "bg-white" : "bg-white/50"
+                                    }`}
+                            />
+                        </button>
                     ))}
                 </div>
             </div>
