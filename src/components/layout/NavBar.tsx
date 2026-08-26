@@ -72,7 +72,9 @@ export default function NavBar() {
                     duration: 0.5,
                     ease: "power3.inOut"
                 })
-                .from(".mobile-nav-link", {
+                // Queried off the menu element rather than by selector: the overlay
+                // renders outside navRef, so the scoped context can't see it.
+                .from(fullScreenMenuRef.current?.querySelectorAll(".mobile-nav-link") ?? [], {
                     y: 50,
                     opacity: 0,
                     stagger: 0.1,
